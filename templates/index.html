@@ -44,4 +44,89 @@
         <a href="/topics" class="button button-secondary">See all topics</a>
     </div>
 </section>
-{% endblock %}
+
+<section class="section-card">
+    <div class="home-grid">
+        <div>
+            <h3>AI Chatbot</h3>
+            <p>Ask the chatbot if you have a doubt about AI interview topics, algorithms, or preparation strategies.</p>
+            <div class="chat-panel">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-message bot">Hi! Ask me anything about AI interview preparation.</div>
+                </div>
+                <div class="chat-input-row">
+                    <input id="chat-input" type="text" placeholder="Ask about overfitting, model selection, or quiz topics..." />
+                    <button id="chat-send" class="button">Send</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Try a Topic Quiz</h3>
+            <p>After learning a topic, test yourself with a quick targeted quiz. Pick Machine Learning, Deep Learning, or Data Preparation.</p>
+            <a href="/quiz" class="button">Start Quiz</a>
+        </div>
+    </div>
+</section>
+
+<script>
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+
+const chatResponses = [
+    {
+        keywords: ["overfit", "overfitting"],
+        response: "Overfitting happens when a model learns training noise instead of the underlying pattern. Use regularization, simpler models, or more data to fix it."
+    },
+    {
+        keywords: ["regression", "classification"],
+        response: "Regression predicts continuous values, while classification predicts discrete categories. Choose based on the type of output you need."
+    },
+    {
+        keywords: ["feature", "scaling"],
+        response: "Feature scaling helps many algorithms by putting input variables on a similar range, improving convergence and distance calculations."
+    },
+    {
+        keywords: ["quiz"],
+        response: "You can start a targeted quiz by clicking the Start Quiz button or visiting the Quiz page."
+    },
+    {
+        keywords: ["deployment", "production"],
+        response: "Deploying AI models requires a data pipeline, model versioning, monitoring, and retraining plans to keep the system reliable."
+    }
+];
+
+function addChatMessage(text, sender) {
+    const message = document.createElement('div');
+    message.className = `chat-message ${sender}`;
+    message.textContent = text;
+    chatMessages.appendChild(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getChatResponse(message) {
+    const lower = message.toLowerCase();
+    for (const item of chatResponses) {
+        if (item.keywords.some(keyword => lower.includes(keyword))) {
+            return item.response;
+        }
+    }
+    return "That's a great question! Try asking me about specific AI interview topics like machine learning, deep learning, or data preparation.";
+}
+
+function handleChat() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addChatMessage(text, 'user');
+    const response = getChatResponse(text);
+    setTimeout(() => addChatMessage(response, 'bot'), 250);
+    chatInput.value = '';
+}
+
+chatSend.addEventListener('click', handleChat);
+chatInput.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+        handleChat();
+    }
+});
+</script>

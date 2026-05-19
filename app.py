@@ -18,6 +18,7 @@ ai_topics = [
         "points": [
             "Feedforward and convolutional networks",
             "Backpropagation and gradient descent",
+            
             "Regularization: dropout, batch normalization"
         ]
     },
@@ -88,6 +89,51 @@ practice_questions = [
     }
 ]
 
+quiz_questions = [
+    {
+        "topic": "Machine Learning Fundamentals",
+        "question": "Which technique helps prevent overfitting by adding a penalty to model complexity?",
+        "options": ["Data augmentation", "Regularization", "Feature scaling", "Normalization"],
+        "answer": "Regularization",
+        "explanation": "Regularization discourages overly complex models by penalizing large weights."
+    },
+    {
+        "topic": "Machine Learning Fundamentals",
+        "question": "What type of model would you use for predicting a continuous value?",
+        "options": ["Classification", "Regression", "Clustering", "Dimensionality reduction"],
+        "answer": "Regression",
+        "explanation": "Regression models predict continuous numeric outcomes."
+    },
+    {
+        "topic": "Deep Learning",
+        "question": "Which activation function is commonly used to avoid vanishing gradients?",
+        "options": ["Sigmoid", "Tanh", "ReLU", "Linear"],
+        "answer": "ReLU",
+        "explanation": "ReLU maintains stronger gradients for positive values, helping deeper networks train."
+    },
+    {
+        "topic": "Data Preparation",
+        "question": "Why is feature scaling important for many machine learning models?",
+        "options": ["It reduces model size", "It ensures features have equal influence", "It increases training data", "It adds noise"],
+        "answer": "It ensures features have equal influence",
+        "explanation": "Scaling helps distance-based and gradient-based models treat features consistently."
+    },
+    {
+        "topic": "AI System Design",
+        "question": "What is one key reason to monitor a deployed AI model in production?",
+        "options": ["To collect more training data", "To ensure model performance remains stable", "To reduce data storage", "To hide model internals"],
+        "answer": "To ensure model performance remains stable",
+        "explanation": "Monitoring detects drift, errors, and performance degradation after deployment."
+    },
+    {
+        "topic": "Model Explainability",
+        "question": "Which metric is useful for evaluating a classifier when classes are imbalanced?",
+        "options": ["Accuracy", "Precision", "Mean squared error", "R-squared"],
+        "answer": "Precision",
+        "explanation": "Precision focuses on true positives and helps evaluate models with imbalanced classes."
+    }
+]
+
 resources = [
     {
         "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow",
@@ -117,6 +163,10 @@ def topics_page():
 @app.route('/practice')
 def practice_page():
     return render_template('practice.html', questions=practice_questions, topics=ai_topics)
+
+@app.route('/quiz')
+def quiz_page():
+    return render_template('quiz.html', topics=ai_topics, quiz_questions=quiz_questions)
 
 @app.route('/resources')
 def resources_page():

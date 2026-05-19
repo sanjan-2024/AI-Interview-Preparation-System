@@ -154,6 +154,142 @@ body {
     margin-top: 20px;
 }
 
+.home-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-top: 20px;
+}
+
+.chat-panel {
+    display: grid;
+    gap: 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.chat-messages {
+    min-height: 180px;
+    max-height: 320px;
+    overflow-y: auto;
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 18px;
+    background: #f8fafc;
+}
+
+.chat-message {
+    padding: 12px 16px;
+    border-radius: 18px;
+    max-width: 90%;
+    line-height: 1.5;
+}
+
+.chat-message.bot {
+    align-self: start;
+    background: #e0f2fe;
+    color: #0f172a;
+}
+
+.chat-message.user {
+    justify-self: end;
+    align-self: end;
+    background: #bfdbfe;
+    color: #0f172a;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.chat-input-row input {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+}
+
+.quiz-panel {
+    display: grid;
+    gap: 28px;
+}
+
+.quiz-topics-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.quiz-topic-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 22px;
+    display: grid;
+    gap: 14px;
+    background: #ffffff;
+}
+
+.quiz-topic-card-full {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.quiz-start-card {
+    padding: 24px;
+    background: #ffffff;
+}
+
+.quiz-action-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.quiz-card,
+.question-card,
+.topic-box,
+.card,
+.resource-card,
+.question-item,
+.topic-item,
+.practice-panel {
+    background: #f8fafc;
+}
+
+.quiz-options {
+    display: grid;
+    gap: 12px;
+}
+
+.quiz-option {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+    background: white;
+}
+
+.quiz-option:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.quiz-result {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 16px;
+    border-radius: 16px;
+}
+
 .practice-panel {
     display: grid;
     gap: 14px;
