@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <h2>Prepare for your next AI or ML interview</h2>
+        <p>Focus on the most important AI interview topics, sharpen your answers, and practice real questions for data science, machine learning, and artificial intelligence roles.</p>
+        <div class="hero-buttons">
+            <a class="button" href="/practice">Start Practice</a>
+            <a class="button button-secondary" href="/topics">Explore Topics</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-card">
+    <h3>What you get</h3>
+    <div class="grid-3">
+        <div class="card">
+            <h4>Core AI Topics</h4>
+            <p>Review essential concepts like machine learning models, neural networks, feature engineering, and evaluation methods.</p>
+        </div>
+        <div class="card">
+            <h4>Practice Questions</h4>
+            <p>Try realistic interview questions with guided discussion points to help you answer with confidence.</p>
+        </div>
+        <div class="card">
+            <h4>Preparation Resources</h4>
+            <p>Find curated books, online courses, and cheat sheets to boost your interview readiness.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-card">
+    <h3>Featured AI Interview Topics</h3>
+    <div class="grid-4">
+        {% for topic in topics[:4] %}
+        <div class="topic-box">
+            <h4>{{ topic.title }}</h4>
+            <p>{{ topic.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="section-footer">
+        <a href="/topics" class="button button-secondary">See all topics</a>
+    </div>
+</section>
+{% endblock %}

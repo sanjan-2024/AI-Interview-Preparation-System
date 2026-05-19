@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-card">
+    <h2>AI & ML Interview Topics</h2>
+    <p>Explore the most frequent interview areas and learn where to focus your study time.</p>
+    <div class="topic-list">
+        {% for topic in topics %}
+        <article class="topic-item">
+            <h3>{{ topic.title }}</h3>
+            <p>{{ topic.description }}</p>
+            <ul>
+                {% for point in topic.points %}
+                <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

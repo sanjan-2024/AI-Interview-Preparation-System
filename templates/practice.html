@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-card">
+    <h2>Practice Interview Questions</h2>
+    <p>Choose a topic and get a strong question to answer aloud or write down.</p>
+    <div class="practice-panel">
+        <label for="topic-select">Select topic</label>
+        <select id="topic-select">
+            <option value="All">All Topics</option>
+            {% for topic in topics %}
+            <option value="{{ topic.title }}">{{ topic.title }}</option>
+            {% endfor %}
+        </select>
+        <button id="random-button" class="button">Show Random Question</button>
+        <div id="question-card" class="question-card">
+            <p>Select a topic and click the button to see a question.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-card">
+    <h3>Sample Questions</h3>
+    <div class="question-list">
+        {% for question in questions[:6] %}
+        <div class="question-item">
+            <h4>{{ question.topic }}</h4>
+            <p>{{ question.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+const questions = {{ questions|tojson }};
+const questionCard = document.getElementById('question-card');
+const topicSelect = document.getElementById('topic-select');
+const randomButton = document.getElementById('random-button');
+
+function showQuestion(question) {
+    questionCard.innerHTML = `<h3>${question.topic}</h3><p>${question.text}</p><p><strong>Tip:</strong> ${question.tip}</p>`;
+}
+
+randomButton.addEventListener('click', () => {
+    const selected = topicSelect.value;
+    const filtered = selected === 'All' ? questions : questions.filter(q => q.topic === selected);
+    if (!filtered.length) {
+        questionCard.innerHTML = '<p>No questions found for this topic.</p>';
+        return;
+    }
+    const question = filtered[Math.floor(Math.random() * filtered.length)];
+    showQuestion(question);
+});
+</script>
+{% endblock %}
