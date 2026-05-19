@@ -1,0 +1,907 @@
+[
+	{
+		"id": 1,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is supervised learning?",
+		"options": [
+			"Learning without labels",
+			"Learning from labeled data",
+			"Learning by reinforcement",
+			"Clustering data points"
+		],
+		"answer": 1,
+		"explanation": "Supervised learning trains models using labeled input-output pairs so the model learns to map inputs to outputs."
+	},
+	{
+		"id": 2,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which algorithm is commonly used for regression tasks?",
+		"options": ["K-means", "Linear Regression", "KNN classification", "Apriori"],
+		"answer": 1,
+		"explanation": "Linear regression predicts continuous numeric values and is a common algorithm for regression tasks."
+	},
+	{
+		"id": 3,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What metric is appropriate for classification with imbalanced classes?",
+		"options": ["Accuracy", "Precision/Recall", "MSE", "R-squared"],
+		"answer": 1,
+		"explanation": "Precision and recall (and F1) are better choices than accuracy when classes are imbalanced."
+	},
+	{
+		"id": 4,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What does overfitting mean?",
+		"options": ["Model underperforms on training data", "Model performs well on training but poorly on new data", "Model always predicts average", "Model has no bias"],
+		"answer": 1,
+		"explanation": "Overfitting happens when a model learns noise from the training set and fails to generalize to unseen data."
+	},
+	{
+		"id": 5,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which method helps reduce overfitting?",
+		"options": ["Adding noise to labels", "Regularization", "Using more features regardless of relevance", "Removing validation set"],
+		"answer": 1,
+		"explanation": "Regularization (L1/L2), early stopping, and using simpler models help reduce overfitting."
+	},
+	{
+		"id": 6,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is cross-validation used for?",
+		"options": ["Optimizing hyperparameters and estimating generalization", "Increasing dataset size", "Feature scaling", "Reducing dimensionality"],
+		"answer": 0,
+		"explanation": "Cross-validation helps estimate model performance on unseen data and can be used to tune hyperparameters."
+	},
+	{
+		"id": 7,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which technique is used to make features comparable in scale?",
+		"options": ["Regularization", "Feature scaling (normalization/standardization)", "PCA", "Bootstrapping"],
+		"answer": 1,
+		"explanation": "Feature scaling like min-max normalization or standardization ensures features have comparable ranges."
+	},
+	{
+		"id": 8,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which model is non-parametric and often used for classification by voting among neighbours?",
+		"options": ["Linear Regression", "Decision Tree", "K-Nearest Neighbors", "Naive Bayes"],
+		"answer": 2,
+		"explanation": "K-Nearest Neighbors classifies based on the labels of nearby training points and is non-parametric."
+	},
+	{
+		"id": 9,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is a confusion matrix?",
+		"options": ["A logging tool", "A table summarizing true vs predicted classes", "A model selection algorithm", "A dimensionality reduction method"],
+		"answer": 1,
+		"explanation": "A confusion matrix shows counts of true positives, false positives, true negatives, and false negatives for classification."
+	},
+	{
+		"id": 10,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which ensemble method builds trees sequentially to correct previous errors?",
+		"options": ["Random Forest", "Gradient Boosting", "Bagging", "K-fold"],
+		"answer": 1,
+		"explanation": "Gradient boosting trains models sequentially, each one correcting errors made by the previous models."
+	},
+	{
+		"id": 11,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is feature engineering?",
+		"options": ["Tuning hyperparameters", "Creating or transforming input features to improve model performance", "Training more epochs", "Deploying models"],
+		"answer": 1,
+		"explanation": "Feature engineering involves creating informative features from raw data to help models learn better."
+	},
+	{
+		"id": 12,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which metric combines precision and recall into one number?",
+		"options": ["Accuracy", "F1 score", "ROC AUC", "MCC"],
+		"answer": 1,
+		"explanation": "The F1 score is the harmonic mean of precision and recall, useful for imbalanced classes."
+	},
+	{
+		"id": 13,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the purpose of a validation set?",
+		"options": ["To evaluate final production performance", "To tune hyperparameters and evaluate during development", "To replace the training set", "To test data cleaning scripts"],
+		"answer": 1,
+		"explanation": "The validation set is used to tune hyperparameters and assess models during development, separate from training and test sets."
+	},
+	{
+		"id": 14,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which of the following reduces dimensionality by finding orthogonal components?",
+		"options": ["t-SNE", "PCA", "LDA (as classifier)", "KNN"],
+		"answer": 1,
+		"explanation": "Principal Component Analysis (PCA) finds orthogonal axes that capture the most variance, reducing dimensionality."
+	},
+	{
+		"id": 15,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is regularization L1 useful for?",
+		"options": ["Encouraging sparse weights (feature selection)", "Guaranteeing convexity", "Scaling features automatically", "Increasing model complexity"],
+		"answer": 0,
+		"explanation": "L1 regularization (Lasso) tends to produce sparse weight vectors, effectively performing feature selection."
+	},
+	{
+		"id": 16,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the bias-variance tradeoff?",
+		"options": ["A tradeoff between model accuracy and dataset size", "Balancing underfitting (high bias) and overfitting (high variance)", "A feature scaling technique", "Hyperparameter search method"],
+		"answer": 1,
+		"explanation": "High bias models underfit, high variance models overfit; finding the right balance improves generalization."
+	},
+	{
+		"id": 17,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which optimizer adapts learning rates per-parameter using first and second moments?",
+		"options": ["SGD", "Adam", "AdaBoost", "RMSProp without momentum"],
+		"answer": 1,
+		"explanation": "Adam uses estimates of first and second moments of gradients to adapt learning rates per-parameter."
+	},
+	{
+		"id": 18,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is early stopping?",
+		"options": ["Stopping data collection early", "Halting training when validation performance stops improving", "Using fewer features", "A deployment strategy"],
+		"answer": 1,
+		"explanation": "Early stopping halts training when validation performance no longer improves, preventing overfitting."
+	},
+	{
+		"id": 19,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which technique reduces variance by averaging multiple models trained on bootstrapped samples?",
+		"options": ["Gradient boosting", "Bagging / Random Forests", "SVM", "PCA"],
+		"answer": 1,
+		"explanation": "Bagging trains models on bootstrap samples and averages predictions; Random Forests apply this to decision trees."
+	},
+	{
+		"id": 20,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Why is class imbalance a problem?",
+		"options": ["Algorithms cannot train at all", "Models may be biased toward majority class and mislead accuracy", "It reduces dataset size", "It helps regularization"],
+		"answer": 1,
+		"explanation": "Class imbalance can cause models to predict the majority class and give misleading high accuracy; precision/recall help evaluate."
+	},
+	{
+		"id": 21,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the kernel trick in SVMs used for?",
+		"options": ["Speeding up SGD", "Implicitly mapping inputs to high-dimensional feature spaces", "Reducing overfitting", "Ensembling models"],
+		"answer": 1,
+		"explanation": "The kernel trick allows SVMs to compute dot-products in a higher-dimensional space without explicit mapping, enabling non-linear separation."
+	},
+	{
+		"id": 22,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "How does gradient descent find minima?",
+		"options": ["By evaluating all possible parameters", "By iteratively moving parameters opposite the gradient of loss", "By random guessing", "Using decision trees"],
+		"answer": 1,
+		"explanation": "Gradient descent updates parameters in the direction that reduces the loss by following the negative gradient."
+	},
+	{
+		"id": 23,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the purpose of learning rate scheduling?",
+		"options": ["To fix datasets", "To adapt the learning rate during training for better convergence", "To increase model size", "To apply regularization"],
+		"answer": 1,
+		"explanation": "Learning rate schedules lower or modify the learning rate during training to help converge and avoid oscillations."
+	},
+	{
+		"id": 24,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Which method estimates uncertainty by training multiple models with different initializations?",
+		"options": ["Dropout at inference", "Ensembling", "Single deterministic model", "PCA"],
+		"answer": 1,
+		"explanation": "Ensembling multiple models provides a distribution of predictions that can be used to estimate uncertainty."
+	},
+	{
+		"id": 25,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "When would you use stratified sampling?",
+		"options": ["When classes are balanced", "To preserve class proportions in train/test splits", "To oversample majority class", "To remove outliers"],
+		"answer": 1,
+		"explanation": "Stratified sampling ensures that train/test splits maintain the same class proportions, especially important for imbalanced datasets."
+	},
+	{
+		"id": 26,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the difference between L1 and L2 regularization?",
+		"options": ["L1 encourages sparsity, L2 shrinks weights smoothly", "L2 encourages sparsity, L1 shrinks weights smoothly", "They are identical", "Neither affects weights"],
+		"answer": 0,
+		"explanation": "L1 tends to produce sparse solutions (zeroing some weights), while L2 shrinks weights continuously."
+	},
+	{
+		"id": 27,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is feature importance in tree-based models?",
+		"options": ["A random score", "A measure of how useful a feature is for splitting and reducing impurity", "The feature mean", "A preprocessing step"],
+		"answer": 1,
+		"explanation": "Feature importance shows how much a feature contributes to reducing impurity across the tree ensemble."
+	},
+	{
+		"id": 28,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why might you use class weighting in a loss function?",
+		"options": ["To balance computation", "To give more importance to rare classes during training", "To normalize features", "To reduce overfitting"],
+		"answer": 1,
+		"explanation": "Class weighting penalizes errors on minority classes more heavily, helping the model learn them better."
+	},
+	{
+		"id": 29,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is calibration of probabilistic classifiers?",
+		"options": ["Fixing model architecture", "Ensuring predicted probabilities reflect true outcome frequencies", "Regularization technique", "Feature scaling method"],
+		"answer": 1,
+		"explanation": "Calibration ensures that predicted probabilities correspond to empirical frequencies (e.g., predictions with 0.8 probability are correct ~80% of time)."
+	},
+	{
+		"id": 30,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is concept drift and why does it matter in production?",
+		"options": ["A syntax error", "Change in data distribution over time causing model degradation", "A type of regularization", "A hardware issue"],
+		"answer": 1,
+		"explanation": "Concept drift occurs when the relationship between inputs and outputs changes over time, requiring monitoring and possible retraining."
+	},
+	{
+		"id": 31,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which loss function is commonly used for binary classification?",
+		"options": ["Mean Squared Error", "Binary Cross-Entropy (Log Loss)", "Hinge Loss for regression", "Cosine Similarity"],
+		"answer": 1,
+		"explanation": "Binary cross-entropy (log loss) measures the difference between predicted probabilities and actual binary labels."
+	},
+	{
+		"id": 32,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What does 'fit' mean in machine learning libraries?",
+		"options": ["Save the model to disk", "Train the model on data", "Evaluate metrics", "Preprocess features"],
+		"answer": 1,
+		"explanation": "'fit' is the method used to train a model on the provided data."
+	},
+	{
+		"id": 33,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which technique is used for handling missing categorical values by creating a new category?",
+		"options": ["Imputation with mean", "Adding a 'missing' category", "Scaling", "Normalization"],
+		"answer": 1,
+		"explanation": "For categorical features, adding a special 'missing' category preserves information about missingness."
+	},
+	{
+		"id": 34,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is a learning curve?",
+		"options": ["Chart of model performance vs training set size", "A new optimizer", "A type of feature", "A clustering plot"],
+		"answer": 0,
+		"explanation": "A learning curve shows how model performance changes with training set size or epochs and helps diagnose bias/variance."
+	},
+	{
+		"id": 35,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is class recall?",
+		"options": ["TP / (TP + FN)", "TP / (TP + FP)", "(TP + TN) / Total", "FP / (FP + TN)"],
+		"answer": 0,
+		"explanation": "Recall measures the fraction of true positives recovered: TP / (TP + FN)."
+	},
+	{
+		"id": 36,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which sampling technique can be used to handle severe class imbalance by duplicating minority examples?",
+		"options": ["Downsampling", "Oversampling (e.g., SMOTE)", "Normalization", "PCA"],
+		"answer": 1,
+		"explanation": "Oversampling techniques like SMOTE create synthetic minority examples to balance classes."
+	},
+	{
+		"id": 37,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the ROC AUC metric used for?",
+		"options": ["Regression error", "Binary classifier ranking performance across thresholds", "Clustering quality", "Feature importance"],
+		"answer": 1,
+		"explanation": "ROC AUC measures the ability of a classifier to rank positive examples higher than negatives across thresholds."
+	},
+	{
+		"id": 38,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which algorithm uses support vectors to define classification boundaries?",
+		"options": ["Decision Trees", "SVM", "KMeans", "Naive Bayes"],
+		"answer": 1,
+		"explanation": "Support Vector Machines use support vectors to define the margin and decision boundary for classification."
+	},
+	{
+		"id": 39,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Why use validation curves?",
+		"options": ["To tune a single hyperparameter and examine bias/variance", "To generate new features", "To scale data", "To visualize data cleaning steps"],
+		"answer": 0,
+		"explanation": "Validation curves show model performance for different values of a hyperparameter, helping find the sweet spot."
+	},
+	{
+		"id": 40,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is adversarial example in ML?",
+		"options": ["A regular test sample", "An input crafted to mislead a model with small perturbations", "A noisy label", "A data augmentation method"],
+		"answer": 1,
+		"explanation": "Adversarial examples are slightly perturbed inputs designed to cause model misclassification, revealing model vulnerabilities."
+	},
+	{
+		"id": 41,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is transfer learning?",
+		"options": ["Training from scratch always", "Reusing a pre-trained model and fine-tuning it on a new task", "Combining two datasets", "Cross-validation"],
+		"answer": 1,
+		"explanation": "Transfer learning adapts models pre-trained on large datasets to new related tasks, reducing data and compute needs."
+	},
+	{
+		"id": 42,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Which technique helps interpret complex models by approximating them locally?",
+		"options": ["PCA", "LIME", "SGD", "KMeans"],
+		"answer": 1,
+		"explanation": "LIME explains individual predictions by approximating the complex model locally with an interpretable model."
+	},
+	{
+		"id": 43,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What does bootstrapping refer to in statistics?",
+		"options": ["Sampling with replacement to estimate distributions", "A type of neural network", "Feature scaling", "Overfitting"],
+		"answer": 0,
+		"explanation": "Bootstrapping uses resampling with replacement to estimate sampling distributions and confidence intervals."
+	},
+	{
+		"id": 44,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is meant by 'explainability' in models?",
+		"options": ["Model runtime speed", "Ability to explain model decisions in human-understandable terms", "Feature scaling", "Model size"],
+		"answer": 1,
+		"explanation": "Explainability aims to provide reasons for model predictions that stakeholders can understand."
+	},
+	{
+		"id": 45,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "When is cross-entropy preferred over MSE?",
+		"options": ["For regression tasks", "For classification tasks with probabilistic outputs", "For clustering", "For dimensionality reduction"],
+		"answer": 1,
+		"explanation": "Cross-entropy is appropriate for classification with predicted probabilities, whereas MSE suits regression."
+	},
+	{
+		"id": 46,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which technique helps detect multicollinearity among features?",
+		"options": ["ROC AUC", "Variance Inflation Factor (VIF)", "Cross-entropy", "KNN"],
+		"answer": 1,
+		"explanation": "VIF measures how much the variance of an estimated regression coefficient increases due to multicollinearity."
+	},
+	{
+		"id": 47,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is one benefit of tree-based models regarding feature scaling?",
+		"options": ["They require heavy scaling", "They are invariant to monotonic feature transformations and don't need scaling", "They cannot handle categorical features", "They always overfit"],
+		"answer": 1,
+		"explanation": "Tree models split on thresholds and generally do not require feature scaling."
+	},
+	{
+		"id": 48,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is gradient clipping used for?",
+		"options": ["To stop training early", "To prevent exploding gradients by capping gradient norms", "To normalize features", "To compress models"],
+		"answer": 1,
+		"explanation": "Gradient clipping limits the magnitude of gradients to stabilize training, particularly in RNNs."
+	},
+	{
+		"id": 49,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why is reproducibility important in ML experiments?",
+		"options": ["It is not important", "To be able to reliably compare experiments and debug issues", "To increase accuracy automatically", "To reduce dataset size"],
+		"answer": 1,
+		"explanation": "Reproducibility ensures that experiments can be rerun with the same results, enabling reliable comparisons and debugging."
+	},
+	{
+		"id": 50,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is label leakage and why should it be avoided?",
+		"options": ["Using future information in training labels which artificially inflates performance", "A type of regularization", "Data augmentation technique", "A sampling method"],
+		"answer": 0,
+		"explanation": "Label leakage happens when training data contains information that would not be available at prediction time, leading to over-optimistic performance."
+	},
+	{
+		"id": 51,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is clustering?",
+		"options": ["Supervised labeling", "Grouping similar data points without labels", "Feature scaling", "Model evaluation"],
+		"answer": 1,
+		"explanation": "Clustering finds groups of similar data points without using labeled outputs."
+	},
+	{
+		"id": 52,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which algorithm is often used for clustering?",
+		"options": ["K-Means", "Linear Regression", "Logistic Regression", "Decision Tree"],
+		"answer": 0,
+		"explanation": "K-Means partitions data into K clusters by minimizing within-cluster variance."
+	},
+	{
+		"id": 53,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is silhouette score used for?",
+		"options": ["Measuring clustering quality", "Measuring regression error", "Feature importance", "Hyperparameter tuning"],
+		"answer": 0,
+		"explanation": "Silhouette score measures how similar an object is to its own cluster compared to other clusters."
+	},
+	{
+		"id": 54,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What does 'one-hot encoding' do?",
+		"options": ["Compresses features", "Converts categorical variables into binary indicator columns", "Normalizes numerical data", "Performs PCA"],
+		"answer": 1,
+		"explanation": "One-hot encoding represents each category as a separate binary feature column."
+	},
+	{
+		"id": 55,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Why use shuffle when creating batches for SGD?",
+		"options": ["To always see the same order", "To break correlations and improve convergence", "To reduce model size", "To avoid scaling"],
+		"answer": 1,
+		"explanation": "Shuffling data before creating mini-batches prevents correlated samples and helps SGD converge more reliably."
+	},
+	{
+		"id": 56,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the difference between generative and discriminative models?",
+		"options": ["Generative models learn P(x,y), discriminative learn P(y|x)", "They are the same", "Discriminative models generate data", "Generative cannot be used for density estimation"],
+		"answer": 0,
+		"explanation": "Generative models model joint distribution and can generate samples; discriminative models directly model the conditional distribution for prediction."
+	},
+	{
+		"id": 57,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is cross-entropy loss measuring?",
+		"options": ["Distance between two probability distributions", "Euclidean distance", "Number of clusters", "Model size"],
+		"answer": 0,
+		"explanation": "Cross-entropy measures the dissimilarity between the true distribution and predicted probabilities."
+	},
+	{
+		"id": 58,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why might you prefer AUC over accuracy?",
+		"options": ["AUC handles threshold-independent ranking and imbalanced classes better", "AUC is easier to compute", "Accuracy handles imbalance better", "AUC is only for regression"],
+		"answer": 0,
+		"explanation": "AUC evaluates ranking ability independent of threshold and is robust to class imbalance."
+	},
+	{
+		"id": 59,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the role of a learning rate in gradient-based optimization?",
+		"options": ["Controls the step size during parameter updates", "Controls the batch size", "Determines number of layers", "A data preprocessing step"],
+		"answer": 0,
+		"explanation": "The learning rate determines how large each update step is; too large can diverge, too small slows training."
+	},
+	{
+		"id": 60,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is a hyperparameter?",
+		"options": ["A parameter learned during training", "A configuration setting not learned and chosen before training", "A data point", "A feature"],
+		"answer": 1,
+		"explanation": "Hyperparameters are chosen outside the training loop, like learning rate, regularization strength, and tree depth."
+	},
+	{
+		"id": 61,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What does 'epoch' mean in training?",
+		"options": ["One pass through the entire training dataset", "One batch", "Number of features", "Validation step"],
+		"answer": 0,
+		"explanation": "An epoch means the algorithm has seen the entire training dataset once."
+	},
+	{
+		"id": 62,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which library is commonly used for classical ML in Python?",
+		"options": ["TensorFlow only", "scikit-learn", "PyTorch only", "Pandas only"],
+		"answer": 1,
+		"explanation": "scikit-learn provides implementations of many classical machine learning algorithms and utilities."
+	},
+	{
+		"id": 63,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is data leakage during preprocessing?",
+		"options": ["When preprocessing uses information from the test set causing optimistic estimates", "When data is missing", "A regularization method", "An optimizer"],
+		"answer": 0,
+		"explanation": "Data leakage occurs when information from validation/test sets leaks into training (e.g., scaling computed on full dataset), inflating performance."
+	},
+	{
+		"id": 64,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which technique can be used to reduce overfitting for decision trees?",
+		"options": ["Increase tree depth", "Pruning or limiting depth", "Remove features", "Use a single sample"],
+		"answer": 1,
+		"explanation": "Pruning or limiting depth reduces complexity and helps prevent tree overfitting."
+	},
+	{
+		"id": 65,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What does 'one-vs-rest' strategy do for multiclass classification?",
+		"options": ["Trains one classifier per class distinguishing it from the rest", "Uses single multi-class algorithm only", "Does clustering", "Performs regression"],
+		"answer": 0,
+		"explanation": "One-vs-rest trains separate binary classifiers for each class against all others for multiclass problems."
+	},
+	{
+		"id": 66,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is an embedding?",
+		"options": ["A sparse representation", "A dense vector representation that captures semantic relationships", "A loss function", "A normalization technique"],
+		"answer": 1,
+		"explanation": "Embeddings are dense numeric vectors mapping discrete items (words, categories) into continuous vectors capturing relationships."
+	},
+	{
+		"id": 67,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why is monitoring model drift essential in production?",
+		"options": ["To reduce model size", "To detect shifts in data distribution and performance degradation", "To increase training speed", "To improve visuals"],
+		"answer": 1,
+		"explanation": "Monitoring drift helps detect when model assumptions no longer hold and triggers retraining or remediation."
+	},
+	{
+		"id": 68,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Which method helps make predictions more interpretable by simplifying models?",
+		"options": ["Distillation (train a simpler model to mimic a complex one)", "Adding noise", "Increasing layers", "Random sampling"],
+		"answer": 0,
+		"explanation": "Model distillation trains a simpler model to approximate a complex model’s outputs, improving interpretability."
+	},
+	{
+		"id": 69,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is PCA mainly used for?",
+		"options": ["Clustering", "Dimensionality reduction by capturing variance", "Classification", "Feature scaling"],
+		"answer": 1,
+		"explanation": "PCA reduces dimensionality by projecting data into principal components that capture the most variance."
+	},
+	{
+		"id": 70,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the difference between batch and online learning?",
+		"options": ["Batch updates using the full dataset; online updates incrementally per sample or small batches", "They are the same", "Online uses GPUs only", "Batch uses no data"],
+		"answer": 0,
+		"explanation": "Batch learning trains on the full dataset at once; online (streaming) learning updates the model incrementally as data arrives."
+	},
+	{
+		"id": 71,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is an epoch in training?",
+		"options": ["One gradient step", "One pass through the training data", "The test set size", "The model architecture"],
+		"answer": 1,
+		"explanation": "An epoch is a single pass through the entire training dataset during training."
+	},
+	{
+		"id": 72,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which plot helps visualize precision-recall tradeoff?",
+		"options": ["ROC curve", "Precision-Recall curve", "Scatter plot of features", "Histogram"],
+		"answer": 1,
+		"explanation": "Precision-Recall curves show the tradeoff between precision and recall at different thresholds."
+	},
+	{
+		"id": 73,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What does L2 regularization add to the loss function?",
+		"options": ["Absolute value of weights", "Squared magnitude of weights", "Product of weights", "No term"],
+		"answer": 1,
+		"explanation": "L2 regularization adds the squared L2 norm of weights to the loss, encouraging smaller weights."
+	},
+	{
+		"id": 74,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is batch normalization used for?",
+		"options": ["Normalize inputs across the batch to stabilize and accelerate training", "Reduce dataset size", "Feature selection", "Clustering"],
+		"answer": 0,
+		"explanation": "BatchNorm normalizes layer inputs across the mini-batch, improving training stability and speed."
+	},
+	{
+		"id": 75,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the curse of dimensionality?",
+		"options": ["The benefit of adding many features", "Problems that arise as feature space dimensionality increases, like sparsity and distance concentration", "A regularization technique", "An evaluation metric"],
+		"answer": 1,
+		"explanation": "High-dimensional spaces make data sparse and distances less meaningful, complicating learning and generalization."
+	},
+	{
+		"id": 76,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which method selects features by measuring mutual information with the target?",
+		"options": ["PCA", "Mutual information feature selection", "Normalization", "Clustering"],
+		"answer": 1,
+		"explanation": "Mutual information measures dependence between features and target and can be used to select informative features."
+	},
+	{
+		"id": 77,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the main idea behind reinforcement learning?",
+		"options": ["Learning from labeled pairs", "Learning by interacting with an environment to maximize cumulative reward", "Clustering data", "Dimensionality reduction"],
+		"answer": 1,
+		"explanation": "Reinforcement learning trains agents to take actions in environments to maximize cumulative rewards."
+	},
+	{
+		"id": 78,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the role of a validation set in hyperparameter tuning?",
+		"options": ["To train the final model", "To select hyperparameters without touching the test set", "To augment data", "To normalize features"],
+		"answer": 1,
+		"explanation": "The validation set is used to tune hyperparameters; the test set should only be used for final evaluation."
+	},
+	{
+		"id": 79,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Which approach helps estimate model uncertainty without full Bayesian inference?",
+		"options": ["Dropout at inference (MC Dropout)", "Single deterministic prediction", "PCA", "KMeans"],
+		"answer": 0,
+		"explanation": "MC Dropout runs dropout at inference multiple times to generate prediction samples and approximate uncertainty."
+	},
+	{
+		"id": 80,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why is feature selection important?",
+		"options": ["To increase training time always", "To reduce overfitting, improve interpretability, and reduce model complexity", "To remove labels", "To change loss function"],
+		"answer": 1,
+		"explanation": "Selecting relevant features can improve generalization, reduce overfitting, and make models easier to interpret."
+	},
+	{
+		"id": 81,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What is a decision tree?",
+		"options": ["A neural network", "A model that splits data on feature thresholds to make predictions", "An optimizer", "A dataset"],
+		"answer": 1,
+		"explanation": "Decision trees recursively split the feature space using thresholds to create interpretable decision rules."
+	},
+	{
+		"id": 82,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which metric is sensitive to class imbalance and better than accuracy?",
+		"options": ["Accuracy", "F1 Score", "Sum of squares", "Mean"],
+		"answer": 1,
+		"explanation": "F1 score balances precision and recall and is more informative than accuracy in imbalanced scenarios."
+	},
+	{
+		"id": 83,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What does ROC curve plot?",
+		"options": ["Precision vs Recall", "True Positive Rate vs False Positive Rate", "Loss vs Epochs", "Accuracy vs Threshold"],
+		"answer": 1,
+		"explanation": "ROC plots the true positive rate (sensitivity) against the false positive rate at various thresholds."
+	},
+	{
+		"id": 84,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is a baseline model?",
+		"options": ["A complex state-of-the-art model", "A simple model used as a reference to compare improvements", "A deployment tool", "A preprocessing step"],
+		"answer": 1,
+		"explanation": "Baselines provide a simple reference performance to evaluate whether more complex models add value."
+	},
+	{
+		"id": 85,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the purpose of a curriculum learning schedule?",
+		"options": ["Train on hardest examples first", "Start with easy examples and gradually increase difficulty to improve learning", "Randomize labels", "Reduce dataset"],
+		"answer": 1,
+		"explanation": "Curriculum learning trains models starting with simpler examples and gradually increasing difficulty to improve convergence."
+	},
+	{
+		"id": 86,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "How can you detect data drift in production?",
+		"options": ["Monitor distribution statistics and model performance metrics over time", "Only monitor server CPU", "Change hyperparameters regularly", "Use larger batch sizes"],
+		"answer": 0,
+		"explanation": "Detect drift by tracking input feature distributions and model metrics; significant changes indicate possible drift."
+	},
+	{
+		"id": 87,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the purpose of data augmentation?",
+		"options": ["To reduce dataset size", "To synthetically increase training examples and improve generalization", "To evaluate models", "To compress data"],
+		"answer": 1,
+		"explanation": "Data augmentation creates modified copies of data (rotations, noise) to increase diversity and reduce overfitting."
+	},
+	{
+		"id": 88,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which approach helps interpret feature contributions in tree ensembles?",
+		"options": ["PCA", "SHAP values", "Batch normalization", "Gradient clipping"],
+		"answer": 1,
+		"explanation": "SHAP values provide consistent feature attributions for complex models including tree ensembles."
+	},
+	{
+		"id": 89,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the purpose of a learning rate warmup?",
+		"options": ["Start with a small learning rate and gradually increase to stabilize early training", "Decrease dataset size", "Prune features", "Normalize labels"],
+		"answer": 0,
+		"explanation": "Warmup helps prevent unstable updates at the start by gradually increasing the learning rate to the target value."
+	},
+	{
+		"id": 90,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why is hyperparameter search important?",
+		"options": ["It has no effect", "It finds settings that improve model performance and generalization", "It only increases model size", "It replaces training"],
+		"answer": 1,
+		"explanation": "Searching hyperparameters (grid/random/Bayesian) finds configurations that yield better performance than defaults."
+	},
+	{
+		"id": 91,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "What does 'precision' measure?",
+		"options": ["TP / (TP + FN)", "TP / (TP + FP)", "(TP + TN)/Total", "FP / (FP + TN)"],
+		"answer": 1,
+		"explanation": "Precision measures proportion of positive predictions that are correct: TP / (TP + FP)."
+	},
+	{
+		"id": 92,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Beginner",
+		"question": "Which model is linear in parameters but can be extended with polynomial features?",
+		"options": ["Linear regression with polynomial features", "KMeans", "Decision Trees", "Naive Bayes"],
+		"answer": 0,
+		"explanation": "Linear models with polynomial feature expansion can model non-linear relationships while remaining linear in coefficients."
+	},
+	{
+		"id": 93,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "What is the role of a test set?",
+		"options": ["To tune hyperparameters", "To evaluate final model performance on unseen data", "To train models", "To augment data"],
+		"answer": 1,
+		"explanation": "The test set is held out until final evaluation to estimate real-world performance."
+	},
+	{
+		"id": 94,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is a Bayesian approach in ML?",
+		"options": ["An approach that treats parameters as random variables with distributions", "A deterministic algorithm", "A data preprocessing step", "A clustering method"],
+		"answer": 0,
+		"explanation": "Bayesian methods place distributions over parameters and update beliefs using observed data via Bayes' rule."
+	},
+	{
+		"id": 95,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is model ensembling?",
+		"options": ["Using a single model only", "Combining multiple models to improve robustness and performance", "Feature scaling", "Label encoding"],
+		"answer": 1,
+		"explanation": "Ensembling aggregates predictions from multiple models (averaging, voting) to reduce variance and improve performance."
+	},
+	{
+		"id": 96,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Intermediate",
+		"question": "Which method is useful for hyperparameter search in large spaces?",
+		"options": ["Grid search always", "Random search or Bayesian optimization", "Manual guesswork", "No search"],
+		"answer": 1,
+		"explanation": "Random search and Bayesian optimization scale better than exhaustive grid search in large hyperparameter spaces."
+	},
+	{
+		"id": 97,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the role of a feature store in ML systems?",
+		"options": ["To store model weights", "To provide a centralized, versioned repository of production-ready features", "To replace databases", "To monitor servers"],
+		"answer": 1,
+		"explanation": "Feature stores provide consistent, versioned feature computations and serve features for training and production inference."
+	},
+	{
+		"id": 98,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is 'batch inference' vs 'online inference'?",
+		"options": ["Batch inference processes many records in bulk; online inference handles single requests with low latency", "They are identical", "Batch is always faster", "Online inference is offline"],
+		"answer": 0,
+		"explanation": "Batch inference runs predictions on large datasets offline; online inference serves single requests in real time."
+	},
+	{
+		"id": 99,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "Why is data provenance important in ML pipelines?",
+		"options": ["To ignore data sources", "To trace the origin and transformations of data for reliability and auditing", "To reduce dataset size", "To scale features"],
+		"answer": 1,
+		"explanation": "Provenance helps ensure data quality, reproducibility, and regulatory compliance by tracking data sources and transformations."
+	},
+	{
+		"id": 100,
+		"domain": "Machine Learning Fundamentals",
+		"difficulty": "Advanced",
+		"question": "What is the key consideration when deploying models across multiple regions?",
+		"options": ["Latency, data residency, and consistent model versions", "Only cost matters", "Use different models always", "Ignore monitoring"],
+		"answer": 0,
+		"explanation": "Deploying across regions requires attention to latency, compliance/data residency, consistent model versions, and monitoring."
+	}
+]

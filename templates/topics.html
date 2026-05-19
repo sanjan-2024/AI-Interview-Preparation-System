@@ -2,20 +2,28 @@
 
 {% block content %}
 <section class="section-card">
-    <h2>AI & ML Interview Topics</h2>
-    <p>Explore the most frequent interview areas and learn where to focus your study time.</p>
-    <div class="topic-list">
-        {% for topic in topics %}
+    <h2>AI Domains</h2>
+    <p>Click a domain to explore topic names, question-and-answer examples, and take a targeted quiz.</p>
+    <div class="topic-grid">
+        {% for domain in topics %}
         <article class="topic-item">
-            <h3>{{ topic.title }}</h3>
-            <p>{{ topic.description }}</p>
+            <h3><a href="/domain/{{ domain.key }}">{{ domain.title }}</a></h3>
+            <p>{{ domain.description }}</p>
+            <h4>Topics</h4>
             <ul>
-                {% for point in topic.points %}
-                <li>{{ point }}</li>
+                {% for item in domain.topics %}
+                <li>{{ item.title }}</li>
                 {% endfor %}
             </ul>
+            <a class="button" href="/domain/{{ domain.key }}">Explore {{ domain.title }}</a>
         </article>
         {% endfor %}
     </div>
+</section>
+
+<section class="section-card">
+    <h3>Total AI Test</h3>
+    <p>Take a complete total test that covers all domains and topics in one session.</p>
+    <a class="button" href="/quiz?domain=All">Take the Total Test</a>
 </section>
 {% endblock %}

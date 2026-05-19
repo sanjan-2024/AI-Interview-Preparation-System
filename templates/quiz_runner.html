@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="quiz-container">
+  <h2>Quiz Runner</h2>
+  <div id="quiz-area">
+    <p><label for="count">Questions:</label>
+    <input id="count" type="number" min="1" max="100" value="10"></p>
+    <button id="startBtn" class="button">Start Quiz (ML)</button>
+  </div>
+
+  <div id="questionCard" style="display:none;">
+    <div id="qText" class="q-text"></div>
+    <div id="options" class="options"></div>
+    <div class="controls">
+      <button id="nextBtn" class="button">Next</button>
+    </div>
+    <div id="result" class="result"></div>
+  </div>
+</div>
+
+<script>
+let questions = []
+let idx = 0
+let score = 0
+
+async function startQuiz(){
+  const count = parseInt(document.getElementById('count').value) || 10
+  const res = await fetch(`/api/questions/ml?count=${count}`)
+  questions = await res.json()
+  idx = 0
+  score = 0
+  if(!questions || questions.length===0){
+    alert('No questions returned')
+    return
+  }
+  document.getElementById('quiz-area').style.display='none'
+  document.getElementById('questionCard').style.display='block'
+  showQuestion()
+}
+
+function showQuestion(){
+  const q = questions[idx]
+  document.getElementById('qText').innerText = `${idx+1}. ${q.question}`
+  const opts = document.getElementById('options')
+  opts.innerHTML = ''
+  q.options.forEach((o,i)=>{
+    const btn = document.createElement('button')
+    btn.className = 'option-btn'
+    btn.innerText = o
+    btn.onclick = ()=>{ selectOption(i) }
+    opts.appendChild(btn)
+  })
+}
+
+function selectOption(i){
+  const q = questions[idx]
+  const correct = q.answer
+  const result = document.getElementById('result')
+  if(i===correct){
+    result.innerText = 'Correct!'
+    score += 1
+  } else {
+    result.innerText = `Incorrect — correct: ${q.options[correct]}`
+  }
+  // disable buttons
+  document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true)
+}
+
+function nextQuestion(){
+  idx += 1
+  document.getElementById('result').innerText = ''
+  if(idx >= questions.length){
+    finishQuiz()
+    return
+  }
+  showQuestion()
+}
+
+function finishQuiz(){
+  document.getElementById('questionCard').style.display='none'
+  document.getElementById('quiz-area').style.display='block'
+  alert(`Quiz finished. Score: ${score}/${questions.length}`)
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz)
+document.getElementById('nextBtn').addEventListener('click', nextQuestion)
+</script>
+
+{% endblock %}

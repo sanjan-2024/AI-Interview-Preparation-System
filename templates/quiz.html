@@ -2,41 +2,49 @@
 
 {% block content %}
 <section class="section-card quiz-panel">
-    <h2>Topic Quizzes</h2>
-    <p>Pick a topic-specific quiz, or take the complete quiz covering all AI interview concepts.</p>
+    <h2>{{ selected_domain_title if selected_domain_key != 'All' else 'Full AI Total Test' }}</h2>
+    <p>Pick a topic-specific quiz, or take the complete quiz covering all AI interview domains.</p>
 
     <div class="quiz-topics-grid">
         {% for topic in topics %}
         <div class="quiz-topic-card">
             <h3>{{ topic.title }}</h3>
             <p>{{ topic.description }}</p>
-            <button class="button quiz-topic-button" data-topic="{{ topic.title }}">Take {{ topic.title }} Quiz</button>
+            <a class="button" href="/quiz?domain={{ topic.key }}">Take {{ topic.title }} Quiz</a>
         </div>
         {% endfor %}
         <div class="quiz-topic-card quiz-topic-card-full">
-            <h3>Full AI Quiz</h3>
-            <p>Test your knowledge across all topics in one quiz.</p>
-            <button class="button quiz-topic-button" data-topic="All">Take Full Quiz</button>
+            <h3>Full AI Test</h3>
+            <p>Test your knowledge across all domains and topics.</p>
+            <a class="button" href="/quiz?domain=All">Take Full Test</a>
         </div>
     </div>
 
     <div class="section-card quiz-start-card">
         <h3>Quiz runner</h3>
-        <p>Use the buttons above to start a topic quiz, then answer the questions below.</p>
+        <p>Answer the questions below. You can restart the quiz at any time.</p>
         <div id="quiz-card" class="quiz-card">
-            <p>Select a quiz above to begin.</p>
+            <p>Select a quiz above or refresh the page to start a new test.</p>
         </div>
     </div>
 </section>
 
 <script>
+const selectedDomainKey = "{{ selected_domain_key }}";
+const selectedDomainTitle = "{{ selected_domain_title }}";
 const quizQuestions = {{ quiz_questions|tojson }};
 const quizCard = document.getElementById('quiz-card');
-const topicButtons = document.querySelectorAll('.quiz-topic-button');
 
 let filteredQuestions = [];
 let currentIndex = 0;
 let score = 0;
+
+function applyDomainFilter(questions) {
+    if (!selectedDomainKey || selectedDomainKey === 'All') {
+        return [...questions];
+    }
+    return questions.filter(q => q.topic === selectedDomainTitle);
+}
 
 function renderQuizCard() {
     if (!filteredQuestions.length) {
@@ -91,11 +99,11 @@ function submitAnswer() {
         currentIndex += 1;
         renderQuizCard();
     });
-    document.getElementById('restart-quiz').addEventListener('click', () => startQuiz(current.topic));
+    document.getElementById('restart-quiz').addEventListener('click', () => startQuiz(selectedDomainTitle));
 }
 
 function startQuiz(topicName) {
-    filteredQuestions = topicName === 'All'
+    filteredQuestions = topicName === 'All' || !topicName
         ? [...quizQuestions]
         : quizQuestions.filter(q => q.topic === topicName);
     currentIndex = 0;
@@ -103,11 +111,13 @@ function startQuiz(topicName) {
     renderQuizCard();
 }
 
-topicButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const topic = button.getAttribute('data-topic');
-        startQuiz(topic);
-    });
-});
+function initPage() {
+    if (selectedDomainKey && selectedDomainKey !== 'All') {
+        filteredQuestions = applyDomainFilter(quizQuestions);
+        startQuiz(selectedDomainTitle);
+    }
+}
+
+initPage();
 </script>
 {% endblock %}

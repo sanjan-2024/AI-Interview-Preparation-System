@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <h2>Welcome to Prep — AI Interview Platform</h2>
+    <p>Practice smartly with topic-based quizzes, a helpful chatbot, and progress tracking.</p>
+    <div class="hero-buttons">
+      <a class="button" href="/runner">Start a Quiz</a>
+      <a class="link-button" href="/topics">Explore Topics</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-card">
+  <h3>Topics</h3>
+  <div class="grid-4">
+    {% for t in topics %}
+    <div class="topic-box">
+      <h4>{{ t.title }}</h4>
+      <p>{{ t.description }}</p>
+      <div class="section-footer">
+        <a class="button-secondary" href="/topics">Open</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

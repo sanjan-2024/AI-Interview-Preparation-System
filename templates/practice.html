@@ -13,9 +13,17 @@
             {% endfor %}
         </select>
         <button id="random-button" class="button">Show Random Question</button>
+        <button id="start-quiz" class="button button-secondary">Take a Quiz</button>
         <div id="question-card" class="question-card">
             <p>Select a topic and click the button to see a question.</p>
         </div>
+    </div>
+</section>
+
+<section id="practice-quiz" class="section-card" style="display:none;">
+    <h3>Practice Quiz</h3>
+    <div id="quiz-card" class="quiz-card">
+        <p>Click <strong>Take a Quiz</strong> to start a 10-question practice quiz.</p>
     </div>
 </section>
 
@@ -36,9 +44,130 @@ const questions = {{ questions|tojson }};
 const questionCard = document.getElementById('question-card');
 const topicSelect = document.getElementById('topic-select');
 const randomButton = document.getElementById('random-button');
+const startQuizButton = document.getElementById('start-quiz');
+const practiceQuizSection = document.getElementById('practice-quiz');
+const quizCard = document.getElementById('quiz-card');
+
+let quizQuestions = [];
+let currentQuizIndex = 0;
+let quizScore = 0;
 
 function showQuestion(question) {
     questionCard.innerHTML = `<h3>${question.topic}</h3><p>${question.text}</p><p><strong>Tip:</strong> ${question.tip}</p>`;
+}
+
+function shuffle(array) {
+    return array
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+}
+
+function interleaveByTopic(questionList) {
+    const groups = {};
+    questionList.forEach(q => {
+        if (!groups[q.topic]) groups[q.topic] = [];
+        groups[q.topic].push(q);
+    });
+
+    Object.values(groups).forEach(group => {
+        group.sort(() => Math.random() - 0.5);
+    });
+
+    const result = [];
+    let lastTopic = null;
+    while (Object.keys(groups).length) {
+        const availableTopics = Object.keys(groups).filter(topic => topic !== lastTopic);
+        const pickTopic = availableTopics.length ? availableTopics[Math.floor(Math.random() * availableTopics.length)] : Object.keys(groups)[0];
+        const question = groups[pickTopic].shift();
+        result.push(question);
+        lastTopic = pickTopic;
+        if (!groups[pickTopic].length) {
+            delete groups[pickTopic];
+        }
+    }
+
+    return result;
+}
+
+function startPracticeQuiz() {
+    const selected = topicSelect.value;
+    const filtered = selected === 'All' ? questions : questions.filter(q => q.topic === selected);
+    if (!filtered.length) {
+        quizCard.innerHTML = '<p>No quiz questions are available for this topic.</p>';
+        practiceQuizSection.style.display = 'block';
+        return;
+    }
+
+    if (selected === 'All') {
+        quizQuestions = interleaveByTopic(shuffle(filtered)).slice(0, 10);
+    } else {
+        quizQuestions = shuffle(filtered).slice(0, 10);
+    }
+
+    currentQuizIndex = 0;
+    quizScore = 0;
+    practiceQuizSection.style.display = 'block';
+    renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+    if (currentQuizIndex >= quizQuestions.length) {
+        showQuizResult();
+        return;
+    }
+
+    const current = quizQuestions[currentQuizIndex];
+    const optionsHtml = current.options.map(option => {
+        return `<label class="quiz-option"><input type="radio" name="quiz-answer" value="${option}"> ${option}</label>`;
+    }).join('');
+
+    quizCard.innerHTML = `
+        <div>
+            <h4>Question ${currentQuizIndex + 1} of ${quizQuestions.length}</h4>
+            <p>${current.text}</p>
+            <div class="quiz-options">${optionsHtml}</div>
+            <button id="submit-answer" class="button">Submit Answer</button>
+        </div>
+    `;
+
+    document.getElementById('submit-answer').addEventListener('click', submitPracticeAnswer);
+}
+
+function submitPracticeAnswer() {
+    const selected = document.querySelector('input[name="quiz-answer"]:checked');
+    if (!selected) {
+        alert('Please select an answer before submitting.');
+        return;
+    }
+
+    const answer = selected.value;
+    const current = quizQuestions[currentQuizIndex];
+    if (answer === current.answer) {
+        quizScore += 1;
+    }
+
+    currentQuizIndex += 1;
+    renderQuizQuestion();
+}
+
+function showQuizResult() {
+    quizCard.innerHTML = `
+        <div class="quiz-result">
+            <h4>Quiz complete!</h4>
+            <p>Your score: <strong>${quizScore} / ${quizQuestions.length}</strong></p>
+            <p>Thank you for the quiz.</p>
+            <div class="quiz-action-row">
+                <button id="retake-quiz" class="button">Retake Quiz</button>
+                <button id="exit-quiz" class="button button-secondary">Exit</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('retake-quiz').addEventListener('click', startPracticeQuiz);
+    document.getElementById('exit-quiz').addEventListener('click', () => {
+        practiceQuizSection.style.display = 'none';
+        quizCard.innerHTML = '<p>Click <strong>Take a Quiz</strong> to start a 10-question practice quiz.</p>';
+    });
 }
 
 randomButton.addEventListener('click', () => {
@@ -51,5 +180,7 @@ randomButton.addEventListener('click', () => {
     const question = filtered[Math.floor(Math.random() * filtered.length)];
     showQuestion(question);
 });
+
+startQuizButton.addEventListener('click', startPracticeQuiz);
 </script>
 {% endblock %}
