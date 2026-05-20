@@ -1,306 +1,110 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-text">
-        <h2>Prepare for your next AI or ML interview</h2>
-        <p>Focus on the most important AI interview topics, sharpen your answers, and practice real questions for data science, machine learning, and artificial intelligence roles.</p>
-        <div class="hero-buttons">
-            <a class="button" href="/practice">Start Practice</a>
-            <a class="button button-secondary" href="/topics">Explore Topics</a>
+<section class="hero section-card">
+    <div class="hero-copy">
+        <h2>Interview Preparation for AI & Machine Learning</h2>
+        <p>Build confidence with domain-focused question banks, topic walkthroughs, and adaptive quizzes that refresh every time.</p>
+        <div class="hero-actions">
+            <a class="button" href="/topics">Browse Domains</a>
+            <a class="button button-secondary" href="/practice">Start Practice</a>
         </div>
+    </div>
+    <div class="hero-domains">
+        <label for="home-domain-select">Choose a domain</label>
+        <select id="home-domain-select">
+            <option value="">Select a domain...</option>
+            {% for domain in topics %}
+            <option value="/domain/{{ domain.key }}">{{ domain.title }}</option>
+            {% endfor %}
+        </select>
     </div>
 </section>
 
 <section class="section-card">
-    <h3>What you get</h3>
-    <div class="grid-3">
-        <div class="card">
-            <h4>Core AI Topics</h4>
-            <p>Review essential concepts like machine learning models, neural networks, feature engineering, and evaluation methods.</p>
-        </div>
-        <div class="card">
-            <h4>Practice Questions</h4>
-            <p>Try realistic interview questions with guided discussion points to help you answer with confidence.</p>
-        </div>
-        <div class="card">
-            <h4>Preparation Resources</h4>
-            <p>Find curated books, online courses, and cheat sheets to boost your interview readiness.</p>
-        </div>
-    </div>
+    <h3>About Interview Preparation</h3>
+    <p>Interview success is built on a strong foundation: understanding core topics, practicing real questions, and reviewing correct answers. Prep guides you through each domain with dedicated topic pages, 100+ questions, and quizzes that change every time.</p>
 </section>
 
-<section class="section-card">
-    <h3>Featured AI Interview Topics</h3>
+<section class="section-card contact-home">
+    <h3>Contact Us</h3>
+    <p>Need help with the prep platform, question flow, or quizzes? Reach out and we’ll help you continue your interview preparation journey.</p>
+    <p class="contact-link"><a href="mailto:contact@prepai.com">contact@prepai.com</a></p>
+</section>
+
+<section class="section-card domain-grid">
+    <h3>Explore Domains</h3>
     <div class="grid-4">
-        {% for topic in topics[:4] %}
-        <div class="topic-box">
-            <h4>{{ topic.title }}</h4>
-            <p>{{ topic.description }}</p>
+        {% for domain in topics %}
+        <div class="domain-card">
+            <h4>{{ domain.title }}</h4>
+            <p>{{ domain.description }}</p>
+            <a class="button" href="/domain/{{ domain.key }}">Open {{ domain.title }}</a>
         </div>
         {% endfor %}
     </div>
-    <div class="section-footer">
-        <a href="/topics" class="button button-secondary">See all topics</a>
-    </div>
 </section>
 
-<section class="section-card">
-    <div class="home-grid">
+<section class="section-card chat-panel">
+    <div class="chat-header">
+        <div class="chat-avatar">P</div>
         <div>
-            <button id="prep-toggle" class="prep-toggle" aria-label="Open Prep chat">
-                <svg viewBox="0 0 120 120" class="prep-logo-svg robo-logo" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="prepGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#2f5bff"/>
-                            <stop offset="100%" stop-color="#8fa1ff"/>
-                        </linearGradient>
-                    </defs>
-                    <circle cx="60" cy="60" r="56" fill="url(#prepGradient)"/>
-                    <g class="robo-body">
-                        <rect x="34" y="38" width="52" height="50" rx="16" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                        <rect x="40" y="50" width="40" height="24" rx="10" fill="#fff"/>
-                        <rect x="48" y="76" width="24" height="12" rx="6" fill="#dbe4ff"/>
-                        <path d="M44 46h8" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
-                        <path d="M68 46h8" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
-                    </g>
-                    <g class="robo-head">
-                        <rect x="34" y="20" width="52" height="32" rx="12" fill="#fff" stroke="#1f2937" stroke-width="3"/>
-                        <circle class="blink-eye" cx="46" cy="34" r="5" fill="#1f2937"/>
-                        <circle class="blink-eye" cx="74" cy="34" r="5" fill="#1f2937"/>
-                        <path d="M50 44q10 8 20 0" stroke="#1f2937" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <path d="M60 20 L60 12" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-                        <circle cx="60" cy="10" r="4" fill="#fff" stroke="#1f2937" stroke-width="2"/>
-                    </g>
-                    <g class="robo-arm robo-arm-left">
-                        <rect x="18" y="50" width="16" height="10" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                        <rect x="18" y="60" width="12" height="16" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                    </g>
-                    <g class="robo-arm robo-arm-right">
-                        <rect x="86" y="50" width="16" height="10" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                        <rect x="90" y="60" width="12" height="16" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                    </g>
-                    <g class="robo-leg robo-leg-left">
-                        <rect x="44" y="88" width="14" height="16" rx="7" fill="#dbe4ff" stroke="#1f2937" stroke-width="3"/>
-                    </g>
-                    <g class="robo-leg robo-leg-right">
-                        <rect x="62" y="88" width="14" height="16" rx="7" fill="#dbe4ff" stroke="#1f2937" stroke-width="3"/>
-                    </g>
-                </svg>
-            </button>
-            <div id="prep-chat-container" class="prep-chat-container" style="display:none;">
-                <div class="chat-header">
-                    <div class="chat-logo">
-                        <svg viewBox="0 0 120 120" class="prep-logo-svg robo-logo" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="prepGradientHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#2f5bff"/>
-                                    <stop offset="100%" stop-color="#8fa1ff"/>
-                                </linearGradient>
-                            </defs>
-                            <circle cx="60" cy="60" r="56" fill="url(#prepGradientHeader)"/>
-                            <g class="robo-body">
-                                <rect x="34" y="38" width="52" height="50" rx="16" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                                <rect x="40" y="50" width="40" height="24" rx="10" fill="#fff"/>
-                                <rect x="48" y="76" width="24" height="12" rx="6" fill="#dbe4ff"/>
-                                <path d="M44 46h8" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
-                                <path d="M68 46h8" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
-                            </g>
-                            <g class="robo-head">
-                                <rect x="34" y="20" width="52" height="32" rx="12" fill="#fff" stroke="#1f2937" stroke-width="3"/>
-                                <circle class="blink-eye" cx="46" cy="34" r="5" fill="#1f2937"/>
-                                <circle class="blink-eye" cx="74" cy="34" r="5" fill="#1f2937"/>
-                                <path d="M50 44q10 8 20 0" stroke="#1f2937" stroke-width="3" stroke-linecap="round" fill="none"/>
-                                <path d="M60 20 L60 12" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-                                <circle cx="60" cy="10" r="4" fill="#fff" stroke="#1f2937" stroke-width="2"/>
-                            </g>
-                            <g class="robo-arm robo-arm-left">
-                                <rect x="18" y="50" width="16" height="10" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                                <rect x="18" y="60" width="12" height="16" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                            </g>
-                            <g class="robo-arm robo-arm-right">
-                                <rect x="86" y="50" width="16" height="10" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                                <rect x="90" y="60" width="12" height="16" rx="6" fill="#eef5ff" stroke="#1f2937" stroke-width="3"/>
-                            </g>
-                            <g class="robo-leg robo-leg-left">
-                                <rect x="44" y="88" width="14" height="16" rx="7" fill="#dbe4ff" stroke="#1f2937" stroke-width="3"/>
-                            </g>
-                            <g class="robo-leg robo-leg-right">
-                                <rect x="62" y="88" width="14" height="16" rx="7" fill="#dbe4ff" stroke="#1f2937" stroke-width="3"/>
-                            </g>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3>Prep</h3>
-                        <p>Your friend and interview copilot.</p>
-                    </div>
-                    <button id="prep-close" class="chat-close-button" aria-label="Close Prep chat">×</button>
-                </div>
-                <div class="chat-panel">
-                    <div class="chat-messages" id="chat-messages"></div>
-                    <div class="chat-input-row">
-                        <input id="chat-input" type="text" placeholder="Ask about models, evaluation, or how to prepare..." />
-                        <button id="chat-send" class="button">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <h3>Main All Topics Quiz</h3>
-            <p>Take the full quiz covering all AI interview topics in one go.</p>
-            <a href="/quiz" class="button">Start Full Quiz</a>
+            <h3>Prep Assistant</h3>
+            <p>Ask anything about AI interview prep, domains, or quizzes.</p>
         </div>
     </div>
+    <div class="chat-window" id="chat-window">
+        <div class="chat-message bot-message">
+            <div class="message-text">Hi! I'm your interview prep chat assistant. Ask me how to get started or what to practice today.</div>
+        </div>
+    </div>
+    <form id="chat-form" class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off">
+        <button type="submit" class="button">Send</button>
+    </form>
 </section>
 
 <script>
-const chatMessages = document.getElementById('chat-messages');
-const chatInput = document.getElementById('chat-input');
-const chatSend = document.getElementById('chat-send');
-const prepToggle = document.getElementById('prep-toggle');
-const prepChatContainer = document.getElementById('prep-chat-container');
-
-function addChatMessage(text, sender) {
-    const message = document.createElement('div');
-    message.className = `chat-message ${sender}`;
-    message.textContent = text;
-    chatMessages.appendChild(message);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function ensureGreeting() {
-    if (!chatMessages.querySelector('.chat-message')) {
-        addChatMessage("Hi, I'm Prep — your friend and interview copilot. Ask me anything about AI interview preparation.", 'bot');
+document.getElementById('home-domain-select').addEventListener('change', function () {
+    if (this.value) {
+        window.location.href = this.value;
     }
+});
+
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatWindow = document.getElementById('chat-window');
+
+function appendMessage(role, text) {
+    const messageEl = document.createElement('div');
+    messageEl.className = `chat-message ${role}-message`;
+    messageEl.innerHTML = `<div class="message-text">${text}</div>`;
+    chatWindow.appendChild(messageEl);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
-prepToggle.addEventListener('click', () => {
-    const visible = prepChatContainer.style.display === 'block';
-    if (visible) {
-        prepChatContainer.style.display = 'none';
+chatForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) {
         return;
     }
-    prepChatContainer.style.display = 'block';
-    ensureGreeting();
-    chatInput.focus();
-});
-
-const prepClose = document.getElementById('prep-close');
-prepClose.addEventListener('click', () => {
-    prepChatContainer.style.display = 'none';
-});
-
-const chatResponses = [
-    {
-        keywords: ["overfit", "overfitting"],
-        response: "Overfitting happens when a model learns training noise instead of the underlying pattern. Use regularization, simpler models, or more data to fix it."
-    },
-    {
-        keywords: ["regression", "classification"],
-        response: "Regression predicts continuous values, while classification predicts discrete categories. Choose based on the type of output you need."
-    },
-    {
-        keywords: ["feature", "scaling"],
-        response: "Feature scaling helps many algorithms by putting input variables on a similar range, improving convergence and distance calculations."
-    },
-    {
-        keywords: ["quiz"],
-        response: "To practice, choose a topic from the Practice page or take the full quiz from the Quiz page."
-    },
-    {
-        keywords: ["deployment", "production"],
-        response: "Deploying AI models means building reliable data flow, versioning, monitoring, and retraining so the system stays stable in production."
-    }
-];
-
-function getChatResponse(message) {
-    const lower = message.toLowerCase().trim();
-    const closeOffer = " Let me know if you'd like a detailed explanation or examples.";
-
-    // useful short definitions
-    const shortDefs = {
-        "python": "Python is a versatile, high-level programming language popular for AI, data science, and web development.",
-        "machine learning": "Machine learning builds models that learn patterns from data to make predictions or decisions.",
-        "deep learning": "Deep learning uses layered neural networks to model complex patterns, often for images and text.",
-        "overfitting": "Overfitting occurs when a model memorizes training noise instead of general patterns; regularization and more data help.",
-        "regression": "Regression predicts continuous values, such as house prices.",
-        "classification": "Classification predicts discrete labels, like spam vs. not spam."
-    };
-
-    // NAME
-    if (/\b(what|who)(\s+is|\s+are|\s+am)?\s+(your|ur)\s+(name|called)\b/.test(lower) || /\bwho\s+are\s+you\b/.test(lower)) {
-        return "My name is Prep. I'm your friendly chatbot for interview preparation." + closeOffer;
-    }
-
-    // GREETINGS (short, natural)
-    if (/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(lower)) {
-        const greetings = [
-            "Hello! I'm Prep, your friendly chatbot for interview preparation.",
-            "Hi — Prep here. I can explain concepts, give examples, or run quick practice questions.",
-            "Hey! Ready to practice or learn something new about AI?"
-        ];
-        return greetings[Math.floor(Math.random() * greetings.length)];
-    }
-
-    // JOKES (casual)
-    if (/\b(joke|tell me a joke|make me laugh)\b/.test(lower)) {
-        const jokes = [
-            "😄 Why do programmers prefer dark mode? Because light attracts bugs!",
-            "Why did the neural network cross the road? To get to the other layer!",
-            "Why did the dataset go to therapy? It had too many missing values."
-        ];
-        return jokes[Math.floor(Math.random() * jokes.length)];
-    }
-
-    // Direct definition requests: answer immediately
-    const defMatch = lower.match(/\b(?:what is|what's|explain|define)\s+(.+)$/);
-    if (defMatch) {
-        const term = defMatch[1].replace(/\?|\.$/, '').trim();
-        for (const key of Object.keys(shortDefs)) {
-            if (term.includes(key)) {
-                let resp = shortDefs[key];
-                if (key === 'python') resp += " For example, `print(\"Hello\")` prints text.";
-                if (key === 'machine learning') resp += " Example: train a model to predict house prices from features.";
-                return resp + closeOffer;
-            }
-        }
-        // general direct helpful reply (no repeated questioning)
-        return `Here's a concise explanation of ${term}: it's a topic with key concepts and practical steps. ${closeOffer}`;
-    }
-
-    // direct term match
-    for (const key of Object.keys(shortDefs)) {
-        if (lower.includes(key)) {
-            return shortDefs[key] + closeOffer;
-        }
-    }
-
-    // existing keyword-driven responses: answer then offer
-    for (const item of chatResponses) {
-        if (item.keywords.some(keyword => lower.includes(keyword))) {
-            return item.response + closeOffer;
-        }
-    }
-
-    // Fallback: provide an immediate helpful strategy rather than asking the user to choose
-    return "I don't have an exact canned reply, but here's a quick approach: clarify the goal, outline the steps, and show a short example if helpful." + closeOffer;
-}
-
-function handleChat() {
-    const text = chatInput.value.trim();
-    if (!text) return;
-    addChatMessage(text, 'user');
-    const response = getChatResponse(text);
-    setTimeout(() => addChatMessage(response, 'bot'), 250);
+    appendMessage('user', text);
     chatInput.value = '';
-}
-
-chatSend.addEventListener('click', handleChat);
-chatInput.addEventListener('keydown', event => {
-    if (event.key === 'Enter') {
-        handleChat();
+    appendMessage('bot', 'Thinking...');
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: text })
+    });
+    const data = await response.json();
+    const botMessages = document.querySelectorAll('.bot-message');
+    const lastBot = botMessages[botMessages.length - 1];
+    if (lastBot) {
+        lastBot.querySelector('.message-text').innerText = data.reply;
     }
 });
 </script>
-
 {% endblock %}

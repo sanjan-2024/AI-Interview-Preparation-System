@@ -55,15 +55,14 @@ function showQuestion(){
 
 function selectOption(i){
   const q = questions[idx]
-  const correct = q.answer
+  const correctIndex = q.answer_index
   const result = document.getElementById('result')
-  if(i===correct){
+  if(i === correctIndex){
     result.innerText = 'Correct!'
     score += 1
   } else {
-    result.innerText = `Incorrect — correct: ${q.options[correct]}`
+    result.innerText = `Incorrect — correct: ${q.options[correctIndex]}`
   }
-  // disable buttons
   document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true)
 }
 

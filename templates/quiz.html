@@ -1,123 +1,108 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="section-card quiz-panel">
-    <h2>{{ selected_domain_title if selected_domain_key != 'All' else 'Full AI Total Test' }}</h2>
-    <p>Pick a topic-specific quiz, or take the complete quiz covering all AI interview domains.</p>
-
-    <div class="quiz-topics-grid">
-        {% for topic in topics %}
-        <div class="quiz-topic-card">
-            <h3>{{ topic.title }}</h3>
-            <p>{{ topic.description }}</p>
-            <a class="button" href="/quiz?domain={{ topic.key }}">Take {{ topic.title }} Quiz</a>
+<section class="section-card quiz-page">
+    <div class="domain-header">
+        <div>
+            <h2>{{ domain.title }}{% if topic %} — {{ topic.title }}{% endif %}</h2>
+            <p>Take a 10-question quiz for this topic. Each attempt loads fresh randomized questions and options.</p>
         </div>
-        {% endfor %}
-        <div class="quiz-topic-card quiz-topic-card-full">
-            <h3>Full AI Test</h3>
-            <p>Test your knowledge across all domains and topics.</p>
-            <a class="button" href="/quiz?domain=All">Take Full Test</a>
-        </div>
+        <a class="button-secondary" href="/domain/{{ domain.key }}">Back to {{ domain.title }}</a>
     </div>
 
-    <div class="section-card quiz-start-card">
-        <h3>Quiz runner</h3>
-        <p>Answer the questions below. You can restart the quiz at any time.</p>
-        <div id="quiz-card" class="quiz-card">
-            <p>Select a quiz above or refresh the page to start a new test.</p>
-        </div>
+    <div class="quiz-card" id="quiz-card">
+        <p>Loading your quiz...</p>
     </div>
 </section>
 
 <script>
-const selectedDomainKey = "{{ selected_domain_key }}";
-const selectedDomainTitle = "{{ selected_domain_title }}";
-const quizQuestions = {{ quiz_questions|tojson }};
 const quizCard = document.getElementById('quiz-card');
-
-let filteredQuestions = [];
-let currentIndex = 0;
+const domainKey = "{{ domain.key }}";
+const topicKey = "{{ topic.key if topic else 'all' }}";
+let questions = [];
+let current = 0;
 let score = 0;
+let selectedAnswer = null;
 
-function applyDomainFilter(questions) {
-    if (!selectedDomainKey || selectedDomainKey === 'All') {
-        return [...questions];
-    }
-    return questions.filter(q => q.topic === selectedDomainTitle);
+async function loadQuiz() {
+    const response = await fetch(`/api/quiz/${domainKey}/${topicKey}?count=10`);
+    questions = await response.json();
+    current = 0;
+    score = 0;
+    selectedAnswer = null;
+    showQuestion();
 }
 
-function renderQuizCard() {
-    if (!filteredQuestions.length) {
-        quizCard.innerHTML = '<p>No quiz questions are available for this topic.</p>';
+function showQuestion() {
+    if (!questions.length) {
+        quizCard.innerHTML = '<p>No questions are available for this topic.</p>';
+        return;
+    }
+    if (current >= questions.length) {
+        quizCard.innerHTML = `
+            <div class="quiz-result">
+                <h3>Quiz Completed</h3>
+                <p>Your score: <strong>${score} / ${questions.length}</strong></p>
+                <button class="button" onclick="loadQuiz()">Retry Quiz</button>
+            </div>
+        `;
         return;
     }
 
-    const current = filteredQuestions[currentIndex];
-    const optionsHtml = current.options.map((option) => {
-        return `<label class="quiz-option"><input type="radio" name="quiz-answer" value="${option}"> ${option}</label>`;
-    }).join('');
-
+    const q = questions[current];
     quizCard.innerHTML = `
         <div>
-            <h3>Question ${currentIndex + 1} of ${filteredQuestions.length}</h3>
-            <p>${current.question}</p>
-            <div class="quiz-options">${optionsHtml}</div>
-            <button id="submit-answer" class="button">Submit Answer</button>
+            <h3>Question ${current + 1} of ${questions.length}</h3>
+            <p>${q.question}</p>
+            <div class="options"></div>
+            <div class="quiz-action-row">
+                <button id="submit-btn" class="button" disabled>Submit</button>
+                <button id="restart-btn" class="button-secondary">Restart</button>
+            </div>
+            <div id="feedback" class="quiz-feedback"></div>
         </div>
     `;
 
-    document.getElementById('submit-answer').addEventListener('click', submitAnswer);
+    const options = quizCard.querySelector('.options');
+    q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-btn';
+        btn.innerText = option;
+        btn.onclick = () => selectAnswer(index);
+        options.appendChild(btn);
+    });
+
+    document.getElementById('restart-btn').addEventListener('click', loadQuiz);
+}
+
+function selectAnswer(index) {
+    selectedAnswer = index;
+    quizCard.querySelectorAll('.option-btn').forEach((button, idx) => {
+        button.classList.toggle('selected', idx === index);
+    });
+    const submitBtn = document.getElementById('submit-btn');
+    submitBtn.disabled = false;
+    submitBtn.onclick = submitAnswer;
 }
 
 function submitAnswer() {
-    const selected = document.querySelector('input[name="quiz-answer"]:checked');
-    if (!selected) {
-        alert('Please choose an answer before submitting.');
-        return;
+    const q = questions[current];
+    const feedback = document.getElementById('feedback');
+    const correct = selectedAnswer === q.answer_index;
+    if (correct) {
+        score += 1;
+        feedback.innerHTML = '<p class="correct">Correct!</p>';
+    } else {
+        feedback.innerHTML = `<p class="incorrect">Incorrect — correct answer: ${q.answer_text}</p>`;
     }
 
-    const answer = selected.value;
-    const current = filteredQuestions[currentIndex];
-    const correct = answer === current.answer;
-    if (correct) score += 1;
-
-    quizCard.innerHTML = `
-        <div class="quiz-result">
-            <h3>${correct ? 'Correct!' : 'Not quite.'}</h3>
-            <p><strong>Your answer:</strong> ${answer}</p>
-            <p><strong>Correct answer:</strong> ${current.answer}</p>
-            <p>${current.explanation}</p>
-            <p>Score: ${score} / ${currentIndex + 1}</p>
-        </div>
-        <div class="quiz-action-row">
-            <button id="next-question" class="button">${currentIndex + 1 < filteredQuestions.length ? 'Next Question' : 'Finish Quiz'}</button>
-            <button id="restart-quiz" class="button button-secondary">Restart Quiz</button>
-        </div>
-    `;
-
-    document.getElementById('next-question').addEventListener('click', () => {
-        currentIndex += 1;
-        renderQuizCard();
-    });
-    document.getElementById('restart-quiz').addEventListener('click', () => startQuiz(selectedDomainTitle));
+    quizCard.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+    document.getElementById('submit-btn').disabled = true;
+    current += 1;
+    setTimeout(showQuestion, 1400);
 }
 
-function startQuiz(topicName) {
-    filteredQuestions = topicName === 'All' || !topicName
-        ? [...quizQuestions]
-        : quizQuestions.filter(q => q.topic === topicName);
-    currentIndex = 0;
-    score = 0;
-    renderQuizCard();
-}
-
-function initPage() {
-    if (selectedDomainKey && selectedDomainKey !== 'All') {
-        filteredQuestions = applyDomainFilter(quizQuestions);
-        startQuiz(selectedDomainTitle);
-    }
-}
-
-initPage();
+loadQuiz();
 </script>
 {% endblock %}

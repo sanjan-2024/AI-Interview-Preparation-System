@@ -2,31 +2,23 @@
 
 {% block content %}
 <section class="section-card">
-    <div class="section-header">
+    <div class="domain-header">
         <div>
             <h2>{{ domain.title }}</h2>
             <p>{{ domain.description }}</p>
         </div>
-        <div class="section-actions">
-            <a class="button button-secondary" href="/topics">Back to Domains</a>
-            <a class="button" href="/quiz?domain={{ domain.key }}">Take {{ domain.title }} Quiz</a>
-            <a class="button button-secondary" href="/quiz?domain=All">Take Total Test</a>
-        </div>
+        <a class="button" href="/quiz/{{ domain.key }}/all">Take {{ domain.title }} Test</a>
     </div>
 
-    {% for topic in domain.topics %}
-    <article class="topic-section">
-        <h3>{{ topic.title }}</h3>
-        <p>{{ topic.summary }}</p>
-        <div class="qa-list">
-            {% for item in topic.qas %}
-            <div class="qa-pair">
-                <p><strong>Q{{ loop.index }}.</strong> {{ item.q }}</p>
-                <p><strong>Answer:</strong> {{ item.a }}</p>
-            </div>
-            {% endfor %}
+    <h3>Interview Topics</h3>
+    <div class="topic-grid">
+        {% for topic in domain.topics %}
+        <div class="topic-card">
+            <h4>{{ topic.title }}</h4>
+            <p>{{ topic.description }}</p>
+            <a class="button-secondary" href="/domain/{{ domain.key }}/{{ topic.key }}">View Questions</a>
         </div>
-    </article>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}

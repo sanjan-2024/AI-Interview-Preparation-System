@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-card">
+    <div class="domain-header">
+        <div>
+            <h2>{{ topic.title }}</h2>
+            <p>{{ topic.description }}</p>
+            <p><strong>{{ questions|length }}</strong> questions available for this topic.</p>
+        </div>
+        <a class="button" href="/quiz/{{ domain.key }}/{{ topic.key }}">Start 10-Question Quiz</a>
+    </div>
+
+    <section class="question-list">
+        {% for question in questions %}
+        <div class="question-item">
+            <h4>Q{{ loop.index }}: {{ question.question }}</h4>
+            <p><strong>Answer:</strong> {{ question.answer }}</p>
+            <p>{{ question.explanation }}</p>
+        </div>
+        {% endfor %}
+    </section>
+</section>
+{% endblock %}
