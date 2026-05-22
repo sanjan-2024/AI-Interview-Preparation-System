@@ -39,5 +39,29 @@
         </div>
     </div>
 </footer>
+<!-- Chatbot widget -->
+<div id="chat-toggle" class="chat-toggle" title="Open Prep chat">
+    <img id="chat-toggle-img" src="/static/logo.png" alt="Prep" />
+    <div class="chat-toggle-label">Prep</div>
+</div>
+
+<div id="chat-widget" class="chat-widget" aria-hidden="true">
+    <div class="chat-header-widget">
+        <div class="chat-header-left">
+            <img id="chat-avatar-img" src="/static/logo.png" alt="Prep" class="chat-avatar-img">
+            <div class="chat-title">Prep</div>
+        </div>
+        <button id="chat-close" class="chat-close">✕</button>
+    </div>
+    <div id="chat-window-widget" class="chat-window-widget">
+        <div class="chat-message bot-message"><div class="message-text">Hi — I'm Prep. Ask me about quizzes or topics.</div></div>
+    </div>
+    <div class="chat-input-widget">
+        <input id="chat-input-widget" placeholder="Ask Prep..." />
+        <button id="chat-send" class="button">Send</button>
+    </div>
+</div>
+
+<script src="/static/chatbot.js"></script>
 </body>
 </html>

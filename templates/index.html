@@ -1,110 +1,212 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <section class="hero section-card">
+
     <div class="hero-copy">
-        <h2>Interview Preparation for AI & Machine Learning</h2>
-        <p>Build confidence with domain-focused question banks, topic walkthroughs, and adaptive quizzes that refresh every time.</p>
+
+        <h2>
+            Interview Preparation for AI & Machine Learning
+        </h2>
+
+        <p>
+            Build confidence with domain-focused question banks,
+            topic walkthroughs, and adaptive quizzes that refresh every time.
+        </p>
+
         <div class="hero-actions">
-            <a class="button" href="/topics">Browse Domains</a>
-            <a class="button button-secondary" href="/practice">Start Practice</a>
+
+            <a class="button" href="/topics">
+                Browse Domains
+            </a>
+
+            <a class="button button-secondary" href="/practice">
+                Start Practice
+            </a>
+
         </div>
+
     </div>
+
     <div class="hero-domains">
-        <label for="home-domain-select">Choose a domain</label>
+
+        <label for="home-domain-select">
+            Choose a domain
+        </label>
+
         <select id="home-domain-select">
-            <option value="">Select a domain...</option>
+
+            <option value="">
+                Select a domain...
+            </option>
+
             {% for domain in topics %}
-            <option value="/domain/{{ domain.key }}">{{ domain.title }}</option>
+
+            <option value="/domain/{{ domain.key }}">
+                {{ domain.title }}
+            </option>
+
             {% endfor %}
+
         </select>
+
     </div>
+
 </section>
+
 
 <section class="section-card">
+
     <h3>About Interview Preparation</h3>
-    <p>Interview success is built on a strong foundation: understanding core topics, practicing real questions, and reviewing correct answers. Prep guides you through each domain with dedicated topic pages, 100+ questions, and quizzes that change every time.</p>
+
+    <p>
+        Interview success is built on a strong foundation:
+        understanding core topics, practicing real questions,
+        and reviewing correct answers.
+
+        Prep guides you through each domain with dedicated topic pages,
+        100+ questions, and quizzes that change every time.
+    </p>
+
 </section>
+
 
 <section class="section-card contact-home">
+
     <h3>Contact Us</h3>
-    <p>Need help with the prep platform, question flow, or quizzes? Reach out and we’ll help you continue your interview preparation journey.</p>
-    <p class="contact-link"><a href="mailto:contact@prepai.com">contact@prepai.com</a></p>
+
+    <p>
+        Need help with the prep platform,
+        question flow, or quizzes?
+
+        Reach out and we’ll help you continue
+        your interview preparation journey.
+    </p>
+
+    <p class="contact-link">
+
+        <a href="mailto:contact@prepai.com">
+            contact@prepai.com
+        </a>
+
+    </p>
+
 </section>
+
 
 <section class="section-card domain-grid">
+
     <h3>Explore Domains</h3>
+
     <div class="grid-4">
+
         {% for domain in topics %}
+
         <div class="domain-card">
+
             <h4>{{ domain.title }}</h4>
+
             <p>{{ domain.description }}</p>
-            <a class="button" href="/domain/{{ domain.key }}">Open {{ domain.title }}</a>
+
+            <a class="button" href="/domain/{{ domain.key }}">
+                Open {{ domain.title }}
+            </a>
+
         </div>
+
         {% endfor %}
+
     </div>
+
 </section>
 
-<section class="section-card chat-panel">
-    <div class="chat-header">
-        <div class="chat-avatar">P</div>
-        <div>
-            <h3>Prep Assistant</h3>
-            <p>Ask anything about AI interview prep, domains, or quizzes.</p>
-        </div>
+
+
+<!-- FLOATING AI BOT -->
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/floating-bot.css') }}">
+
+
+<div id="ai-bot" onclick="toggleBotChat()">
+
+    <div class="bot-body">
+
+        <div class="eye left"></div>
+
+        <div class="eye right"></div>
+
+        <div class="mouth"></div>
+
     </div>
-    <div class="chat-window" id="chat-window">
-        <div class="chat-message bot-message">
-            <div class="message-text">Hi! I'm your interview prep chat assistant. Ask me how to get started or what to practice today.</div>
-        </div>
-    </div>
-    <form id="chat-form" class="chat-input-row">
-        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off">
-        <button type="submit" class="button">Send</button>
-    </form>
-</section>
+
+</div>
+
+
+
+<!-- CHAT POPUP -->
+
+<div id="chat-popup">
+
+    <iframe
+        src="/chatbot"
+        frameborder="0">
+    </iframe>
+
+</div>
+
+
 
 <script>
-document.getElementById('home-domain-select').addEventListener('change', function () {
+
+document.getElementById('home-domain-select')
+.addEventListener('change', function () {
+
     if (this.value) {
+
         window.location.href = this.value;
+
     }
+
 });
 
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
-const chatWindow = document.getElementById('chat-window');
 
-function appendMessage(role, text) {
-    const messageEl = document.createElement('div');
-    messageEl.className = `chat-message ${role}-message`;
-    messageEl.innerHTML = `<div class="message-text">${text}</div>`;
-    chatWindow.appendChild(messageEl);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
+
+function toggleBotChat(){
+
+    const popup = document.getElementById("chat-popup");
+
+    if(
+        popup.style.display === "none" ||
+        popup.style.display === ""
+    ){
+
+        popup.style.display = "block";
+
+    }
+
+    else{
+
+        popup.style.display = "none";
+
+    }
+
 }
 
-chatForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const text = chatInput.value.trim();
-    if (!text) {
-        return;
-    }
-    appendMessage('user', text);
-    chatInput.value = '';
-    appendMessage('bot', 'Thinking...');
-    const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message: text })
-    });
-    const data = await response.json();
-    const botMessages = document.querySelectorAll('.bot-message');
-    const lastBot = botMessages[botMessages.length - 1];
-    if (lastBot) {
-        lastBot.querySelector('.message-text').innerText = data.reply;
-    }
-});
+
+
+/* HIDE POPUP INITIALLY */
+
+window.onload = function(){
+
+    document.getElementById("chat-popup").style.display = "none";
+
+}
+
 </script>
+
+
+<script src="{{ url_for('static', filename='js/floating-bot.js') }}"></script>
+
 {% endblock %}

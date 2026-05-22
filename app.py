@@ -176,27 +176,20 @@ def build_quiz_question(question):
 
 def synthesize_chat_response(message):
     text = message.strip().lower()
+
     if not text:
         return "Hi there! Ask me anything about AI interview prep, quizzes, or study topics."
+
     if 'hello' in text or 'hi' in text or 'hey' in text:
-        return "Hello! I'm your Prep assistant. Ask me about domains, quizzes, or how to practice for AI interviews."
-    if 'domain' in text or 'topics' in text:
-        return "We cover Machine Learning, Deep Learning, Data Preparation, Explainability, and AI System Design. You can open any domain from the home page or use the dropdown."
-    if 'quiz' in text or 'questions' in text:
-        return "Each quiz gives you 10 fresh questions every time. Click a topic page and then tap Start Quiz to begin."
+        return "Hello! I'm your Prep assistant."
+
     if 'machine' in text or 'ml' in text:
-        return "Machine Learning is our first domain, with topics like supervised learning, model evaluation, feature engineering, and model selection."
+        return "Machine Learning covers regression, classification, and evaluation techniques."
+
     if 'deep' in text or 'dl' in text:
-        return "Deep Learning covers neural network architectures like CNN, RNN, and transformers, plus training and deployment."
-    if 'data' in text or 'preparation' in text:
-        return "Data Preparation is about cleaning, feature engineering, pipelines, and making your data ready for models."
-    if 'explain' in text or 'interpret' in text:
-        return "Explainability helps you understand model decisions, interpret results, and handle bias or fairness questions."
-    if 'design' in text or 'system' in text:
-        return "AI System Design is about building scalable ML infrastructure, monitoring models, and production readiness."
-    if 'score' in text or 'result' in text:
-        return "At the end of every quiz you will see your score and whether each answer was correct. Keep practicing to improve."
-    return "Great question! I can help with interview topics, quiz flow, and domain landing pages. Try asking for a domain summary or quiz guidance."
+        return "Deep Learning includes CNNs, RNNs, and Transformers."
+
+    return "Great question! Keep practicing AI interview topics."
 
 
 @app.route('/api/chat', methods=['POST'])
@@ -228,67 +221,106 @@ def practice():
         }
         for q in load_ml_questions()[:50]
     ]
-    return render_template('practice.html', topics=DOMAINS, questions=sample_questions)
+
+    return render_template(
+        'practice.html',
+        topics=DOMAINS,
+        questions=sample_questions
+    )
 
 
 @app.route('/domain/<domain_key>')
 def domain_detail(domain_key):
+
     domain = get_domain(domain_key)
+
     if not domain:
         abort(404)
-    return render_template('domain_detail.html', domain=domain, topics=DOMAINS)
+
+    return render_template(
+        'domain_detail.html',
+        domain=domain,
+        topics=DOMAINS
+    )
 
 
 @app.route('/domain/<domain_key>/<topic_key>')
 def topic_detail(domain_key, topic_key):
+
     domain = get_domain(domain_key)
+
     if not domain:
         abort(404)
+
     topic = get_topic(domain, topic_key)
+
     if not topic:
         abort(404)
+
     questions = question_page_items(domain_key, topic_key)
-    return render_template('topic_detail.html', domain=domain, topic=topic, questions=questions, topics=DOMAINS)
+
+    return render_template(
+        'topic_detail.html',
+        domain=domain,
+        topic=topic,
+        questions=questions,
+        topics=DOMAINS
+    )
 
 
 @app.route('/quiz/<domain_key>/<topic_key>')
 def quiz(domain_key, topic_key):
+
     domain = get_domain(domain_key)
+
     if not domain:
         abort(404)
+
     topic = get_topic(domain, topic_key) if topic_key != 'all' else None
-    return render_template('quiz.html', domain=domain, topic=topic, topics=DOMAINS)
+
+    return render_template(
+        'quiz.html',
+        domain=domain,
+        topic=topic,
+        topics=DOMAINS
+    )
 
 
 @app.route('/api/quiz/<domain_key>/<topic_key>')
 def api_quiz(domain_key, topic_key):
+
     count = int(request.args.get('count', 10))
+
     questions = questions_for_topic(domain_key, topic_key)
+
     random.shuffle(questions)
+
     selected = questions[:min(count, len(questions))]
+
     return jsonify([build_quiz_question(q) for q in selected])
 
 
 @app.route('/resources')
 def resources():
+
     resources = [
         {
             'title': 'Coursera AI For Everyone',
-            'description': 'A practical introduction to AI applications and workflows.',
+            'description': 'A practical introduction to AI applications.',
             'link': 'https://www.coursera.org/learn/ai-for-everyone'
         },
         {
-            'title': 'Fast.ai Deep Learning Course',
-            'description': 'Hands-on deep learning with practical examples and exercises.',
+            'title': 'Fast.ai Deep Learning',
+            'description': 'Hands-on deep learning course.',
             'link': 'https://www.fast.ai/'
-        },
-        {
-            'title': 'Kaggle Learn Python',
-            'description': 'Data science and machine learning fundamentals for interviews.',
-            'link': 'https://www.kaggle.com/learn/python'
         }
     ]
-    return render_template('resources.html', topics=DOMAINS, resources=resources)
+
+    return render_template(
+        'resources.html',
+        topics=DOMAINS,
+        resources=resources
+    )
 
 
 @app.route('/dashboard')
@@ -299,6 +331,12 @@ def dashboard():
 @app.route('/runner')
 def runner():
     return render_template('quiz_runner.html', topics=DOMAINS)
+
+
+# CHATBOT ROUTE
+@app.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
 
 
 if __name__ == '__main__':
